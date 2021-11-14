@@ -2,11 +2,9 @@ import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type ScreenProps = {
-  PostPreview: { postId: number };
-};
+import { AppStackProps } from '../../types';
 
-type Props = NativeStackScreenProps<ScreenProps, 'PostPreview'>;
+type Props = NativeStackScreenProps<AppStackProps, 'PostPreview'>;
 
 const PostPreview = ({ route }: Props) => {
   const { params } = route;
