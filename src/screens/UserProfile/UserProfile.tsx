@@ -1,11 +1,17 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const UserProfile = () => {
+  const { navigate } = useNavigation();
+
   return (
     <SafeAreaView>
       <View>
-        <Text>Profile</Text>
+        <Button mode="contained" onPress={() => navigate('SignIn')}>
+          Sign in
+        </Button>
       </View>
     </SafeAreaView>
   );
