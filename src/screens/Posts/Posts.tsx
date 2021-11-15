@@ -4,11 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, List } from 'react-native-paper';
 
 import { useGetPosts } from '../../api/posts';
-import { Post } from '../../types';
 
 const Posts = () => {
   const { navigate } = useNavigation();
-  const { data: posts, isLoading } = useGetPosts();
+  const { data, isLoading } = useGetPosts();
 
   return (
     <SafeAreaView>
@@ -17,8 +16,8 @@ const Posts = () => {
           <ActivityIndicator size="large" />
         ) : (
           <List.Section>
-            {!!posts &&
-              posts.map((post: Post, index: number) => (
+            {!!data &&
+              data.posts.map((post, index) => (
                 <List.Item
                   key={index}
                   title={post.title}
