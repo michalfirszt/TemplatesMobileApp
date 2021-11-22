@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, List } from 'react-native-paper';
 
 import { useGetPosts } from '../../api/posts';
+import { screenNames } from '../../navigation/screenNames';
 
 const Posts = () => {
   const { navigate } = useNavigation();
@@ -21,7 +22,9 @@ const Posts = () => {
                 <List.Item
                   key={index}
                   title={post.title}
-                  onPress={() => navigate('PostPreview', { postId: post.id })}
+                  onPress={() =>
+                    navigate(screenNames.PostPreview, { postId: post.id })
+                  }
                   hasTVPreferredFocus={false}
                   tvParallaxProperties={false}
                 />
