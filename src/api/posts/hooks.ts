@@ -1,10 +1,28 @@
 import { useQuery } from 'react-query';
 
-import { fetchPosts } from './requests';
-import { getPosts } from './selectors';
+import { fetchPost, fetchPosts } from './requests';
+import { getPost, getPosts } from './selectors';
+import { handleSelectors } from '../shared';
+import { PostQueryKey } from '../../types';
 
-export const useGetPosts = ({ ...options } = {}) =>
+export const useGetPosts = ({
+  selectors = { posts: getPosts },
+  ...options
+} = {}) =>
   useQuery('posts', fetchPosts, {
-    select: getPosts,
+    select: handleSelectors(selectors),
     ...options,
   });
+
+export const useGetPost = ({
+  postId = 0,
+  selectors = { post: getPost },
+  ...options
+} = {}) => {
+  const queryKey: PostQueryKey = ['post', { postId }];
+
+  return useQuery(queryKey, fetchPost, {
+    select: handleSelectors(selectors),
+    ...options,
+  });
+};
