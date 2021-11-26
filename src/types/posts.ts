@@ -3,3 +3,5 @@ export type Post = {
   title: string;
   description: string;
 };
+
+export type PostQueryKey = ['post', { postId: number | null }];

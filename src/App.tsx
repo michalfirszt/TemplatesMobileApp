@@ -9,7 +9,7 @@ import AppStack from './navigation/AppStack';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5000,
+      staleTime: 2000,
     },
   },
 });
