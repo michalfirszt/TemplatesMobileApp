@@ -5,4 +5,6 @@ export const screenNames = {
   Settings: 'Settings',
   PostPreview: 'PostPreview',
   SignIn: 'SignIn',
+  CreatePost: 'CreatePost',
+  EditPost: 'EditPost',
 };
