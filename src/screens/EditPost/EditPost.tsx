@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -32,13 +32,13 @@ const EditPost = ({ route }: Props): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View>
+      <ScrollView>
         <PostForm
           onSubmit={onSubmit}
           buttonText="Edit post"
           defaultValues={params.post}
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

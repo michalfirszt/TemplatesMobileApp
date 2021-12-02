@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import {
+  FlatList,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -18,6 +18,12 @@ import {
 import { useGetPosts } from '../../api/posts';
 import { screenNames } from '../../navigation/screenNames';
 import { lightTheme } from '../../theme';
+import { Post } from '../../types';
+
+type ListProps = {
+  item: Post;
+  index: number;
+};
 
 const styles = StyleSheet.create({
   postCard: {
@@ -48,25 +54,27 @@ const Posts = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View>
-          {!!data &&
-            data.posts.map((post, index) => (
+      <View>
+        {!!data && (
+          <FlatList
+            data={data.posts}
+            renderItem={({ item, index }: ListProps) => (
               <Card key={index} style={styles.postCard}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigate(screenNames.PostPreview, { postId: post.id })
+                    navigate(screenNames.PostPreview, { postId: item.id })
                   }>
-                  <Card.Cover source={{ uri: post.image }} />
+                  <Card.Cover source={{ uri: item.image }} />
                   <Card.Content>
-                    <Title>{post.title}</Title>
-                    <Paragraph>{post.description}</Paragraph>
+                    <Title>{item.title}</Title>
+                    <Paragraph>{item.description}</Paragraph>
                   </Card.Content>
                 </TouchableOpacity>
               </Card>
-            ))}
-        </View>
-      </ScrollView>
+            )}
+          />
+        )}
+      </View>
       <FAB
         style={styles.fab}
         small

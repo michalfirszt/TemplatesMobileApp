@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useCreatePost } from '../../api/posts';
@@ -25,9 +25,9 @@ const CreatePost = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View>
+      <ScrollView>
         <PostForm onSubmit={onSubmit} buttonText="Create post" />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
