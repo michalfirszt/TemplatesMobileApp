@@ -1,9 +1,16 @@
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useInfiniteQuery } from 'react-query';
 
-import { createPost, editPost, fetchPost, fetchPosts } from './requests';
+import {
+  createPost,
+  editPost,
+  fetchPost,
+  fetchPostBatch,
+  fetchPosts,
+} from './requests';
 import { getPost, getPosts } from './selectors';
 import { handleSelectors } from '../shared';
 import { PostQueryKey } from '../../types';
+import { POST_BATCH_LIMIT } from '../../constants';
 
 export const useGetPosts = ({
   selectors = { posts: getPosts },
@@ -26,6 +33,13 @@ export const useGetPost = ({
     ...options,
   });
 };
+
+export const useGetPostBatch = ({ ...options } = {}) =>
+  useInfiniteQuery('postBatch', fetchPostBatch, {
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.data.length < POST_BATCH_LIMIT ? undefined : pages.length + 1,
+    ...options,
+  });
 
 export const useCreatePost = (options = {}) =>
   useMutation(createPost, {
