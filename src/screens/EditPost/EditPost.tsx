@@ -36,7 +36,10 @@ const EditPost = ({ route }: Props): JSX.Element => {
         <PostForm
           onSubmit={onSubmit}
           buttonText="Edit post"
-          defaultValues={params.post}
+          defaultValues={{
+            ...params.post,
+            comments: [{ content: '' }],
+          }}
         />
       </ScrollView>
     </SafeAreaView>

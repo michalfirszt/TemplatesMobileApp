@@ -17,3 +17,5 @@ export const fetchPostBatch = ({ pageParam = 1 }): Promise<{ data: Post[] }> =>
 export const createPost = (data: Post) => client.post('posts', data);
 
 export const editPost = (data: Post) => client.put(`/posts/${data.id}`, data);
+
+export const deletePost = (postId: number) => client.delete(`/posts/${postId}`);

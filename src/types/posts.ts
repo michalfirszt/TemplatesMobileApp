@@ -4,6 +4,9 @@ export type Post = {
   image: string;
   description: string;
   content: string;
+  comments: {
+    content: string;
+  }[];
 };
 
 export type PostFormData = Omit<Post, 'id'>;

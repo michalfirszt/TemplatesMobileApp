@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
   ActivityIndicator,
   Card,
@@ -40,8 +40,14 @@ const styles = StyleSheet.create({
 
 const Posts = () => {
   const { navigate } = useNavigation();
-  const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
-    useGetPostBatch();
+  const {
+    data,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  } = useGetPostBatch();
 
   const posts = useMemo(
     () => data?.pages.flatMap((response) => response.data),
@@ -53,6 +59,12 @@ const Posts = () => {
       fetchNextPage();
     }
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
   if (isLoading) {
     return <ActivityIndicator size="large" />;
