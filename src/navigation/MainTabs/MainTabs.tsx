@@ -2,12 +2,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { Map, Posts, Settings } from '../../screens';
+import { CalendarPreview, Map, Posts, Settings } from '../../screens';
 import { screenNames } from '../screenNames';
 
 const Tab = createBottomTabNavigator();
 
 const iconNames = {
+  [screenNames.CalendarPreview]: 'ios-calendar',
   [screenNames.Posts]: 'ios-list',
   [screenNames.Map]: 'ios-map',
   [screenNames.Settings]: 'ios-settings',
@@ -40,6 +41,11 @@ const MainTabs = () => (
     <Tab.Screen
       name={screenNames.Map}
       component={Map}
+      options={{ headerShown: false }}
+    />
+    <Tab.Screen
+      name={screenNames.CalendarPreview}
+      component={CalendarPreview}
       options={{ headerShown: false }}
     />
     <Tab.Screen
