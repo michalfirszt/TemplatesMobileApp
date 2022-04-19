@@ -7,6 +7,7 @@ import {
   fetchPostBatch,
   fetchPosts,
   deletePost,
+  deletePostBatch,
 } from './requests';
 import { getPost, getPosts } from './selectors';
 import { handleSelectors } from '../shared';
@@ -57,5 +58,11 @@ export const useEditPost = (options = {}) =>
 export const useDeletePost = (options = {}) =>
   useMutation(deletePost, {
     mutationKey: 'deletePost',
+    ...options,
+  });
+
+export const useDeletePostBatch = (options = {}) =>
+  useMutation(deletePostBatch, {
+    mutationKey: 'deletePostBatch',
     ...options,
   });
