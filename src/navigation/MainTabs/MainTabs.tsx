@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { CalendarPreview, Map, Posts, Settings } from '../../screens';
+import { CalendarAgenda, Map, Posts, Settings } from '../../screens';
 import { screenNames } from '../screenNames';
 
 const Tab = createBottomTabNavigator();
@@ -45,7 +45,7 @@ const MainTabs = () => (
     />
     <Tab.Screen
       name={screenNames.CalendarPreview}
-      component={CalendarPreview}
+      component={CalendarAgenda}
       options={{ headerShown: false }}
     />
     <Tab.Screen

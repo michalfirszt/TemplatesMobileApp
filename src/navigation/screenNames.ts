@@ -1,5 +1,6 @@
 export const screenNames = {
   CalendarPreview: 'Calendar',
+  CalendarAgenda: 'Calendar agenda',
   CalendarListPreview: 'Calendar list',
   Map: 'Map',
   Profile: 'Profile',

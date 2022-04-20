@@ -13,7 +13,6 @@ const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
   const [isSignedIn, setIsSignedIn] = useState<null | boolean>(null);
-  console.log(isSignedIn);
 
   useEffect(() => {
     const username = storageTools.getData('@username');
