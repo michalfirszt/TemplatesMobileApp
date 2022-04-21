@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
   ActivityIndicator,
   Card,
@@ -15,7 +15,7 @@ import {
   Paragraph,
 } from 'react-native-paper';
 
-import { useGetPosts } from '../../api/posts';
+import { useGetPostBatch } from '../../api/posts';
 import { screenNames } from '../../navigation/screenNames';
 import { lightTheme } from '../../theme';
 import { Post } from '../../types';
@@ -40,7 +40,25 @@ const styles = StyleSheet.create({
 
 const Posts = () => {
   const { navigate } = useNavigation();
-  const { data, isLoading, refetch } = useGetPosts();
+  const {
+    data,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  } = useGetPostBatch();
+
+  const posts = useMemo(
+    () => data?.pages.flatMap((response) => response.data),
+    [data],
+  );
+
+  const handleOnEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   useFocusEffect(
     useCallback(() => {
@@ -57,7 +75,11 @@ const Posts = () => {
       <View>
         {!!data && (
           <FlatList
-            data={data.posts}
+            data={posts}
+            ListFooterComponent={() => (
+              <>{isFetchingNextPage && <ActivityIndicator size="large" />}</>
+            )}
+            onEndReached={handleOnEndReached}
             renderItem={({ item, index }: ListProps) => (
               <Card key={index} style={styles.postCard}>
                 <TouchableOpacity

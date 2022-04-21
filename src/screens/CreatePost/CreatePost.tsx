@@ -6,6 +6,7 @@ import { useCreatePost } from '../../api/posts';
 import { PostFormData } from '../../types';
 import PostForm from '../../components/PostForm';
 import { screenNames } from '../../navigation/screenNames';
+import { lightTheme } from '../../theme';
 
 const CreatePost = (): JSX.Element => {
   const { navigate } = useNavigation();
@@ -25,7 +26,8 @@ const CreatePost = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{ paddingVertical: lightTheme.spaceUnit * 2 }}>
         <PostForm onSubmit={onSubmit} buttonText="Create post" />
       </ScrollView>
     </SafeAreaView>

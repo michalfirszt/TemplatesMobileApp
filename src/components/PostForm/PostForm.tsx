@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { PostFormData } from '../../types';
 import { lightTheme } from '../../theme';
+import CommentFields from './CommentFields';
 
 type Props = {
   buttonText: string;
@@ -37,6 +38,7 @@ const PostForm = ({
       image: '',
       description: '',
       content: '',
+      comments: [{ content: '' }, { content: '' }],
     },
   });
 
@@ -115,6 +117,9 @@ const PostForm = ({
             />
           )}
         />
+      </View>
+      <View>
+        <CommentFields control={control} errors={errors} />
       </View>
       <View style={styles.formRow}>
         <Button

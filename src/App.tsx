@@ -19,7 +19,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={lightTheme}>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={lightTheme}>
           <AppStack />
         </NavigationContainer>
       </SafeAreaProvider>
