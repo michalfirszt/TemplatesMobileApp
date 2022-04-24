@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
   bottom: {
     backgroundColor: lightTheme.colors.white,
   },
-  container: {
-    height: '100%',
-  },
   content: {
     flex: 1,
+  },
+  keyboardView: {
+    height: '100%',
   },
 });
 
@@ -23,7 +23,7 @@ const UserProfile = (): JSX.Element => {
   const { navigate } = useNavigation();
 
   return (
-    <KeyboardView style={styles.container}>
+    <KeyboardView style={styles.keyboardView}>
       <View style={styles.content}>
         <View style={styles.content}>
           <Button mode="contained" onPress={() => navigate(screenNames.SignIn)}>

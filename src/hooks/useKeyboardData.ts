@@ -1,10 +1,8 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
-import { Keyboard, Platform } from 'react-native';
-import { lightTheme } from '../theme';
+import { useState, useRef, useEffect } from 'react';
+import { Keyboard } from 'react-native';
 
 type KeyboardData = {
   isKeyboardOpen: boolean;
-  keyboardPaddingBottom: number;
 };
 
 export const useKeyboardData = (): KeyboardData => {
@@ -13,21 +11,13 @@ export const useKeyboardData = (): KeyboardData => {
 
   const [isKeyboardOpen, setIsKeyboardOpen] = useState<boolean>(false);
 
-  const keyboardPaddingBottom = useMemo(
-    () =>
-      isKeyboardOpen && Platform.OS === 'ios' ? lightTheme.spaceUnit * 8 : 0,
-    [isKeyboardOpen],
-  );
-
   useEffect(() => {
-    keyboardShowListener.current = Keyboard.addListener(
-      'keyboardWillShow',
-      () => setIsKeyboardOpen(true),
+    keyboardShowListener.current = Keyboard.addListener('keyboardDidShow', () =>
+      setIsKeyboardOpen(true),
     );
 
-    keyboardHideListener.current = Keyboard.addListener(
-      'keyboardWillHide',
-      () => setIsKeyboardOpen(false),
+    keyboardHideListener.current = Keyboard.addListener('keyboardDidHide', () =>
+      setIsKeyboardOpen(false),
     );
 
     return () => {
@@ -36,5 +26,5 @@ export const useKeyboardData = (): KeyboardData => {
     };
   }, [keyboardShowListener, keyboardHideListener]);
 
-  return { isKeyboardOpen, keyboardPaddingBottom };
+  return { isKeyboardOpen };
 };

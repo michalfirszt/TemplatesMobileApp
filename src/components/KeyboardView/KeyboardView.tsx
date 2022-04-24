@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -6,6 +6,8 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+
+import { useKeyboardData } from '../../hooks';
 
 type Props = {
   children: ReactNode;
@@ -17,11 +19,20 @@ export const KeyboardView = ({
   children,
   style,
   hideKeyboard = true,
-}: Props): JSX.Element => (
-  <KeyboardAvoidingView behavior="padding" style={style}>
-    <TouchableWithoutFeedback
-      onPress={hideKeyboard ? Keyboard.dismiss : () => {}}>
-      {children}
-    </TouchableWithoutFeedback>
-  </KeyboardAvoidingView>
-);
+}: Props): JSX.Element => {
+  const { isKeyboardOpen } = useKeyboardData();
+
+  const handleFieldPress = useCallback((): void => {
+    if (hideKeyboard && isKeyboardOpen) {
+      Keyboard.dismiss();
+    }
+  }, [hideKeyboard, isKeyboardOpen]);
+
+  return (
+    <KeyboardAvoidingView behavior="padding" style={style}>
+      <TouchableWithoutFeedback onPress={handleFieldPress}>
+        {children}
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+};
