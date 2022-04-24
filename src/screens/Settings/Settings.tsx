@@ -1,11 +1,19 @@
-import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import { Switch } from 'react-native-paper';
 
-const Settings = () => {
+import { ThemeContext } from '../../context/themeContext';
+
+const Settings = (): JSX.Element => {
+  const { isThemeDark, setIsThemeDark } = useContext(ThemeContext);
+
   return (
     <SafeAreaView>
       <View>
-        <Text>Settings</Text>
+        <Switch
+          value={isThemeDark}
+          onChange={() => setIsThemeDark(!isThemeDark)}
+        />
       </View>
     </SafeAreaView>
   );

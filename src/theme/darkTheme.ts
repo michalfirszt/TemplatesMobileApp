@@ -8,4 +8,5 @@ export const darkTheme = {
     ...DarkTheme.colors,
     ...NavigationDarkTheme.colors,
   },
+  spaceUnit: 8,
 };

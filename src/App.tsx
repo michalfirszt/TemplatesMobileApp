@@ -1,11 +1,9 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { Provider as ThemeProvider } from 'react-native-paper';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { lightTheme } from './theme';
 import AppStack from './navigation/AppStack';
+import { ThemeContextWrapper } from './context/themeContext';
+import { AppProvider } from './providers/AppProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,15 +13,13 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
+const App = (): JSX.Element => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={lightTheme}>
-      <SafeAreaProvider>
-        <NavigationContainer theme={lightTheme}>
-          <AppStack />
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <ThemeContextWrapper>
+      <AppProvider>
+        <AppStack />
+      </AppProvider>
+    </ThemeContextWrapper>
   </QueryClientProvider>
 );
 
