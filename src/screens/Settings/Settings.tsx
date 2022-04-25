@@ -5,15 +5,12 @@ import { Switch } from 'react-native-paper';
 import { ThemeContext } from '../../context/themeContext';
 
 const Settings = (): JSX.Element => {
-  const { isThemeDark, setIsThemeDark } = useContext(ThemeContext);
+  const { isThemeDark, toggleIsThemeDark } = useContext(ThemeContext);
 
   return (
     <SafeAreaView>
       <View>
-        <Switch
-          value={isThemeDark}
-          onChange={() => setIsThemeDark(!isThemeDark)}
-        />
+        <Switch value={isThemeDark} onChange={toggleIsThemeDark} />
       </View>
     </SafeAreaView>
   );
